@@ -1,16 +1,37 @@
-FROM python:3.7.8-slim
+FROM python:3.9.12
 
-# remember to expose the port your app'll be exposed on.
+# CMD ["/bin/bash"]
+
+# # remember to expose the port your app'll be exposed on.
 EXPOSE 8080
 
 RUN pip install -U pip
 
-COPY requirements.txt app/requirements.txt
-RUN pip install -r app/requirements.txt
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
 
 # copy into a directory of its own (so it isn't in the toplevel dir)
-COPY . /app
+RUN mkdir -p /app
+COPY app.py app/app.py
 WORKDIR /app
+
+# ENTRYPOINT [ "streamlit", "--version" ]
 
 # run it!
 ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8080", "--server.address=0.0.0.0"]
+
+
+# # Expose port you want your app on
+# EXPOSE 8080
+
+# # Upgrade pip and install requirements
+# COPY requirements.txt requirements.txt
+# RUN pip install -U pip
+# RUN pip install -r requirements.txt
+
+# # Copy app code and set working directory
+# COPY app.py app.py
+# WORKDIR .
+
+# # Run
+# ENTRYPOINT [“streamlit”, “run”, “app.py”, “–server.port=8080”, “–server.address=0.0.0.0”]

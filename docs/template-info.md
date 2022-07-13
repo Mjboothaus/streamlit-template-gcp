@@ -51,11 +51,23 @@ Ready to deploy your app for other's to use? Great, you'll need to [get your GCP
 When you're set up, run:
 
 ```bash
+gcloud init
+```
+
+```bash
 make gcloud-deploy
 ```
+
+this is just the equivalent of `gcloud app deploy` (defaults to using `app.yaml`)
 
 This build your app, and deploy it through App Engine. You'll need to select your app's name and the region you'd like to deploy the app into.
 
 You'll see a URL in your console (or navigate to the GCP Console's App Engine dashboard and grab the URL from there).
 
 You're done! 
+
+### Viewing the app
+
+```bash
+gcloud app browse
+```
